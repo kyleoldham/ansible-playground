@@ -1,0 +1,15 @@
+---
+- hosts: ec2instances
+  tasks:
+  - name: create directory
+    file:
+      path: "/home/ec2-user/.ssh"
+      state: directory
+  - name: create authorized_keys
+    file:
+      path: "/home/ec2-user/.ssh/authorized_keys"
+      state: touch
+  - name: place pubkey
+      lineinfile:
+        path: "/home/ec2-user/.ssh/authorized_keys"
+        line: "{{ pubkey }}"
